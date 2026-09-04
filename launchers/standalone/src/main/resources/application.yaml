@@ -7,7 +7,8 @@ server:
 
 spring:
   profiles:
-    active: ${S2_DB_TYPE:h2}
+#    active: ${S2_DB_TYPE:h2}
+    active: postgres
   application:
     name: chat
   config:

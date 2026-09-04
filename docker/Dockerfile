@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 # Argument to pass in the supersonic version at build time
 ARG SUPERSONIC_VERSION
 
-# Copy the supersonic standalone zip file into the container
+# Copy the supersonic standalone zip file into the container 注意这一步的zip文件在assembly/build目录下并不存在，而是来自assembly/bin/supersonic-build.sh产物，而assembly/bin/supersonic-build.sh是由docker/docker-build-publish.sh调用，而且docker/docker-build-publish.sh脚本中已经引用了当前DOCKERFILE，因此直接执行docker/docker-build-publish.sh脚本即可
 COPY assembly/build/supersonic-standalone-${SUPERSONIC_VERSION}.zip .
 
 # Unzip the supersonic standalone zip

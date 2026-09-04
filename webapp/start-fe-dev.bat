@@ -24,18 +24,28 @@ if errorlevel 1 (
 rmdir /s /q ".\packages\supersonic-fe\src\.umi"
 rmdir /s /q ".\packages\supersonic-fe\src\.umi-production"
 
+@REM echo Approve build dependencies ...
+@REM call pnpm approve-builds esbuild core-js core-js-pure es5-ext puppeteer-core --all
+@REM IF %ERRORLEVEL% NEQ 0 (
+@REM     echo approve-builds failed
+@REM     pause
+@REM     exit /b %ERRORLEVEL%
+@REM )
+
 cd ./packages/chat-sdk
 
 call pnpm i
 
+IF %ERRORLEVEL% NEQ 0 (echo chat-sdk install fail & pause & exit /b %ERRORLEVEL%)
+
 call pnpm run build
 
-call pnpm link --global
+IF %ERRORLEVEL% NEQ 0 (echo chat-sdk build fail & pause & exit /b %ERRORLEVEL%)
 
 cd ../supersonic-fe
 
-call pnpm link ../chat-sdk
-
 call pnpm i
+
+IF %ERRORLEVEL% NEQ 0 (echo supersonic-fe install fail & pause & exit /b %ERRORLEVEL%)
 
 call pnpm start
