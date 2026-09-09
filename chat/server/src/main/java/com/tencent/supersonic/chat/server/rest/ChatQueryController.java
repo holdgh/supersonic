@@ -37,14 +37,14 @@ public class ChatQueryController {
         return chatQueryService.search(chatParseReq);
     }
 
-    @PostMapping("parse")
+    @PostMapping("parse")  // TODO 问数第一步：意图解析与sql生成
     public Object parse(@RequestBody ChatParseReq chatParseReq, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         chatParseReq.setUser(UserHolder.findUser(request, response));
         return chatQueryService.parse(chatParseReq);
     }
 
-    @PostMapping("execute")
+    @PostMapping("execute")  // TODO 执行数据库查询与问题推荐
     public Object execute(@RequestBody ChatExecuteReq chatExecuteReq, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         chatExecuteReq.setUser(UserHolder.findUser(request, response));

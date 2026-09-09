@@ -27,7 +27,7 @@ public class ParseContext {
         return !request.isDisableLLM();
     }
 
-    public boolean needFeedback() {
+    public boolean needFeedback() {  // 是否需要反馈 TODO 推测解析结果有多个时，需要跟用户反馈
         return agent.enableFeedback() && (Objects.isNull(request.getSelectedParse())
                 && response.getSelectedParses().size() > 1);
     }

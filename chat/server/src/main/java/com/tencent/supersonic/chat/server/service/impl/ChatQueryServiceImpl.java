@@ -112,22 +112,22 @@ public class ChatQueryServiceImpl implements ChatQueryService {
         if (Objects.isNull(queryId)) {
             queryId = chatManageService.createChatQuery(chatParseReq);
             chatParseReq.setQueryId(queryId);
-        }
+        }  // query持久化处理
 
         ParseContext parseContext = buildParseContext(chatParseReq, new ChatParseResp(queryId));
         for (ChatQueryParser parser : chatQueryParsers) {
-            if (parser.accept(parseContext)) {
-                parser.parse(parseContext);
+            if (parser.accept(parseContext)) {  // 选择合适的query解析器【目前有三种解析器：NL2PluginParser、NL2SQLParser和PlainTextParser】
+                parser.parse(parseContext);  // 解析操作结果会直接设置在parseContext中
             }
-        }
+        }  // 解析
 
         for (ParseResultProcessor processor : parseResultProcessors) {
             if (processor.accept(parseContext)) {
                 processor.process(parseContext);
             }
-        }
+        }  // 解析后处理
 
-        if (!parseContext.needFeedback()) {
+        if (!parseContext.needFeedback()) {  // 不需要反馈时，直接记录解析耗时
             parseContext.getResponse().getParseTimeCost().setParseTime(System.currentTimeMillis()
                     - parseContext.getResponse().getParseTimeCost().getParseStartTime());
             chatManageService.batchAddParse(chatParseReq, parseContext.getResponse());

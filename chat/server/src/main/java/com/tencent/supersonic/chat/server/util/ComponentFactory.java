@@ -52,7 +52,7 @@ public class ComponentFactory {
 
     private static <T> List<T> init(Class<T> factoryType, List list) {
         list.addAll(SpringFactoriesLoader.loadFactories(factoryType,
-                Thread.currentThread().getContextClassLoader()));
+                Thread.currentThread().getContextClassLoader()));  // 通过spring工程加载所有属于factoryType类型的实例，构造factoryType实例列表
         return list;
     }
 
