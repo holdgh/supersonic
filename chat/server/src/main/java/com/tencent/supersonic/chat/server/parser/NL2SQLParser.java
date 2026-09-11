@@ -97,7 +97,7 @@ public class NL2SQLParser implements ChatQueryParser {
                 queryNLReq.setDataSetIds(Collections.singleton(datasetId));
                 ChatParseResp parseResp = new ChatParseResp(parseContext.getRequest().getQueryId());
                 for (MapModeEnum mode : Lists.newArrayList(MapModeEnum.STRICT,
-                        MapModeEnum.MODERATE)) {
+                        MapModeEnum.MODERATE)) {  // 采用两种模式解析【不同的模式有着不同的threshold】
                     queryNLReq.setMapModeEnum(mode);
                     doParse(queryNLReq, parseResp);
                 }
@@ -155,7 +155,7 @@ public class NL2SQLParser implements ChatQueryParser {
         }
     }
 
-    private void doParse(QueryNLReq req, ChatParseResp resp) {
+    private void doParse(QueryNLReq req, ChatParseResp resp) {  // 解析操作
         ChatLayerService chatLayerService = ContextUtils.getBean(ChatLayerService.class);
         ParseResp parseResp = chatLayerService.parse(req);
         if (parseResp.getState().equals(ParseResp.ParseState.COMPLETED)) {

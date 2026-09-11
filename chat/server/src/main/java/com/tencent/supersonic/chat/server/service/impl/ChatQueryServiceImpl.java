@@ -112,11 +112,11 @@ public class ChatQueryServiceImpl implements ChatQueryService {
         if (Objects.isNull(queryId)) {
             queryId = chatManageService.createChatQuery(chatParseReq);
             chatParseReq.setQueryId(queryId);
-        }  // query持久化处理
+        }  // query持久化处理【s2_chat_query】
 
         ParseContext parseContext = buildParseContext(chatParseReq, new ChatParseResp(queryId));
         for (ChatQueryParser parser : chatQueryParsers) {
-            if (parser.accept(parseContext)) {  // 选择合适的query解析器【目前有三种解析器：NL2PluginParser、NL2SQLParser和PlainTextParser】
+            if (parser.accept(parseContext)) {  // 选择合适的query解析器【目前有三种解析器：NL2PluginParser【智能体中含有插件】、NL2SQLParser【智能体中含有数据集工具】和PlainTextParser【智能体中没有工具】】
                 parser.parse(parseContext);  // 解析操作结果会直接设置在parseContext中
             }
         }  // 解析

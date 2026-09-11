@@ -64,7 +64,7 @@ public class S2ChatLayerService implements ChatLayerService {
     }
 
     @Override
-    public ParseResp parse(QueryNLReq queryNLReq) {
+    public ParseResp parse(QueryNLReq queryNLReq) {  // 解析查询操作
         ParseResp parseResp = new ParseResp(queryNLReq.getQueryText());
         ChatQueryContext queryCtx = buildChatQueryContext(queryNLReq);
         queryCtx.setParseResp(parseResp);
