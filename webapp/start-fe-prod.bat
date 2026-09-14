@@ -23,9 +23,9 @@ rmdir /S /Q .\packages\supersonic-fe\src\.umi-production
 cd ./packages/chat-sdk
 call pnpm i
 call pnpm run build
-call pnpm link --global
+@REM call pnpm link --global
 cd ../supersonic-fe
-call pnpm link ../chat-sdk
+@REM call pnpm link ../chat-sdk
 call pnpm i
 call pnpm run build:os-local
 tar -zcvf supersonic-webapp.tar.gz supersonic-webapp

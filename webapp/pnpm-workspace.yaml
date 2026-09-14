@@ -2,3 +2,13 @@ prefer-workspace-packages: true
 packages:
   - 'packages/*'
   - 'apps/*'
+allowBuilds:
+  '@umijs/yorkie': set this to true or false
+  core-js: true
+  core-js-pure: true
+  es5-ext: true
+  esbuild: true
+  mime: set this to true or false
+  puppeteer-core: true
+overrides:
+  supersonic-chat-sdk: link:packages/chat-sdk
