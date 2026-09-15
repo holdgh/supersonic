@@ -3,12 +3,12 @@ packages:
   - 'packages/*'
   - 'apps/*'
 allowBuilds:
-  '@umijs/yorkie': set this to true or false
+  '@umijs/yorkie': true
   core-js: true
   core-js-pure: true
   es5-ext: true
   esbuild: true
-  mime: set this to true or false
+  mime: true
   puppeteer-core: true
 overrides:
   supersonic-chat-sdk: link:packages/chat-sdk

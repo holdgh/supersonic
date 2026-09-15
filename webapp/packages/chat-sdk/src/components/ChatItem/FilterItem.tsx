@@ -126,7 +126,9 @@ const FilterItem: React.FC<Props> = ({
     onFiltersChange(newFilters);
   };
 
-  const onDateChange = (_: any, date: string) => {
+//   const onDateChange = (_: any, date: string) => {
+  const onDateChange = (_: any, date: string | string[]) => {
+    // 如果是数组（区间选择），取第一个，或者按业务处理；当前是单个日期选择直接取string
     const newFilters = filters.map((item, indexValue) => {
       if (item.bizName === filter.bizName && index === indexValue) {
         item.value = date;
